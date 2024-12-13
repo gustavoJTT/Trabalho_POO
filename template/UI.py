@@ -2,6 +2,13 @@ import streamlit as st
 from view.view import View
 
 class UI:
+    st.set_page_config(
+    page_title="APP",  
+    page_icon="🚀",               
+    layout="wide",                
+    initial_sidebar_state="expanded"  
+    )
+
     @classmethod
     def Run(cls):
         if 'page' not in st.session_state:
