@@ -2,7 +2,6 @@ import streamlit as st
 from view.view import View
 
 class UI:
-
     @classmethod
     def Run(cls):
         if 'page' not in st.session_state:
@@ -46,7 +45,7 @@ class UI:
 
             case "pedidos":
                 st.header("pedidos")
-                
+
     @classmethod
     def __login(cls):
         section = st.tabs(["Login", "Cadastro"])
