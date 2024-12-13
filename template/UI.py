@@ -33,7 +33,20 @@ class UI:
     @classmethod
     def __admin(cls):
         st.title("Bem-vindo à página de administrador")
+        section = st.sidebar.selectbox("Menu Administrador", ("clientes", "categorias", "produtos", "pedidos"))
+        match section:
+            case "clientes":
+                st.header("Clientes cadastrados")
 
+            case "categorias":
+                st.header("categorias de produtos")
+
+            case "produtos":
+                st.header("Produtos")
+
+            case "pedidos":
+                st.header("pedidos")
+                
     @classmethod
     def __login(cls):
         section = st.tabs(["Login", "Cadastro"])
