@@ -3,7 +3,6 @@ from view.view import View
 
 class UI:
 
-
     @classmethod
     def Run(cls):
         if 'page' not in st.session_state:
@@ -11,7 +10,7 @@ class UI:
             
         match st.session_state.page:
             case 'home':
-                cls.__home()
+                cls.__cliente()
 
             case'login':
                 cls.__login()
@@ -20,8 +19,16 @@ class UI:
                 cls.__admin()
 
     @classmethod
-    def __home(cls):
-        st.title("Bem-vindo à página principal!")
+    def __cliente(cls):
+        section = st.sidebar.selectbox("menu", ("home", "carrinho", "pedidos"))
+        match section:
+            case "home":
+                st.header("home")
+            case "carrinho":
+                st.header("carrinho")
+            case "pedidos":
+                st.header("pedidos")
+
 
     @classmethod
     def __admin(cls):
