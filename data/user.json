@@ -1,1 +1,1 @@
-[{"id": "admin", "password": "1234", "nome": "Administrador"}, {"id": "flavio", "password": "123", "nome": "Flavio"}, {"id": "gustavo", "password": "123", "nome": "Gustavo"}, {"id": "teste", "nome": "teste1", "password": "teste10"}, {"id": "teste1", "nome": "teste", "password": "teste"}]
+[{"id": 1, "nome": "flavio matias", "email": "flavio.matias@gmail.com", "fone": "+55 (84) 99182-8152", "senha": "flavio123", "adm": true}, {"id": 2, "nome": "cliente", "email": "cliente@gmail.com", "fone": "+55 (84) 4002-8922", "senha": "cliente123", "adm": false}]

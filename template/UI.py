@@ -1,18 +1,22 @@
 import streamlit as st
-from view.view import View
+from view.login_view import ViewLogin
+from view.cliente_view import ClientView
 
 class UI:
-    st.set_page_config(
-    page_title="APP",  
-    page_icon="🚀",           
-    #layout="wide",    faz a tela bucgar ficando esticada e centralizada quando da f5
-    initial_sidebar_state="expanded"
-    )
-
     @classmethod
     def Run(cls):
         if 'page' not in st.session_state:
             st.session_state.page = 'login'
+
+        if 'user' not in st.session_state:
+            st.session_state.user = None
+
+        st.set_page_config(
+        page_title="APP",  
+        page_icon="🚀",           
+        initial_sidebar_state="expanded"
+        )
+
             
         match st.session_state.page:
             case 'home':
@@ -30,6 +34,8 @@ class UI:
         match section:
             case "home":
                 st.header("home")
+                cls.listar_produtos(ClientView.listar_produtos())
+
             case "carrinho":
                 st.header("carrinho")
             case "pedidos":
@@ -55,21 +61,42 @@ class UI:
 
     @classmethod
     def __login(cls):
-        section = st.tabs(["Login", "Cadastro"])
 
-        with section[0]:
-            st.header("Login")
-            username = st.text_input("Usuário", key="login_username")
-            password = st.text_input("Senha", type="password", key="login_password")
+        with st.container(border=True):
 
-            if st.button("Entrar"):
-                View.login_authentication(username, password)
+            section = st.tabs(["Login", "Cadastro"])
 
-        with section[1]:
-            st.header("Cadastro")
-            username = st.text_input("Usuário", key="register_username")
-            nome = st.text_input("Nome", key="register_nome")
-            password = st.text_input("Senha", type="password", key="register_password")
+            with section[0]:
+                st.header("Login")
+                username = st.text_input("Nome de usuario ou Email", key="login_username")
+                password = st.text_input("Senha", type="password", key="login_password")
 
-            if st.button("Cadastrar"):
-                View.register_authentication(username, nome, password)
+                if st.button("Entrar"):
+                    ViewLogin.login_authentication(username, password)
+
+            with section[1]:
+                st.header("Cadastro")
+                username = st.text_input("nome", key="register_username")
+                email = st.text_input("email", key="register_email")
+                tel = st.text_input("telefone", key="register_tel")
+                password = st.text_input("Senha", type="password", key="register_password")
+
+                if st.button("Cadastrar"):
+                    ViewLogin.register_authentication(username, email, tel, password)
+
+    @staticmethod
+    def listar_produtos(prod):
+        for idx, produto in enumerate(prod):
+            with st.container(border=True):
+                col1, col2 = st.columns([1, 3])
+                
+                with col1:
+                    st.image(produto.img, width=100, use_container_width=True)
+
+                with col2:
+                    st.subheader(produto.nome)
+                    st.write(produto.descricao)
+                    st.write(f"**Preço**: {produto.preco}")
+                    if st.button(f"Adicionar ao Carrinho", key=f'button-{idx}', type="primary"):
+                        st.success(f"{produto.nome} adicionado ao carrinho!", icon="✅")
+
