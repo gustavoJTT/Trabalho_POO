@@ -4,9 +4,9 @@ from view.view import View
 class UI:
     st.set_page_config(
     page_title="APP",  
-    page_icon="🚀",               
-    layout="wide",                
-    initial_sidebar_state="expanded"  
+    page_icon="🚀",           
+    #layout="wide",    faz a tela bucgar ficando esticada e centralizada quando da f5
+    initial_sidebar_state="expanded"
     )
 
     @classmethod
@@ -68,8 +68,8 @@ class UI:
         with section[1]:
             st.header("Cadastro")
             username = st.text_input("Usuário", key="register_username")
+            nome = st.text_input("Nome", key="register_nome")
             password = st.text_input("Senha", type="password", key="register_password")
 
             if st.button("Cadastrar"):
-                View.register_authentication()
-
+                View.register_authentication(username, nome, password)

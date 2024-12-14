@@ -1,0 +1,1 @@
+# nsei se vai usar, coloqui para ver se da certo a tabela com os cientes q é pra mostrar na tela de clientes do admin, vi como tava a de gilbert
