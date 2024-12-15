@@ -33,13 +33,18 @@ class UI:
         section = st.sidebar.selectbox("menu", ("home", "carrinho", "pedidos"))
         match section:
             case "home":
-                st.header("home")
+                st.header("Produtos")
+                st.markdown("---")
                 cls.listar_produtos(ClientView.listar_produtos())
 
             case "carrinho":
                 st.header("carrinho")
             case "pedidos":
                 st.header("pedidos")
+
+        if st.sidebar.button("sair"):
+            st.session_state.page = 'login'
+            st.rerun()
 
 
     @classmethod
@@ -58,6 +63,9 @@ class UI:
 
             case "pedidos":
                 st.header("pedidos")
+        if st.sidebar.button("sair"):
+            st.session_state.page = 'login'
+            st.rerun()
 
     @classmethod
     def __login(cls):
@@ -96,7 +104,7 @@ class UI:
                 with col2:
                     st.subheader(produto.nome)
                     st.write(produto.descricao)
-                    st.write(f"**Preço**: {produto.preco}")
+                    st.write(f"**Preço**: R${produto.preco}")
                     if st.button(f"Adicionar ao Carrinho", key=f'button-{idx}', type="primary"):
                         st.success(f"{produto.nome} adicionado ao carrinho!", icon="✅")
 
