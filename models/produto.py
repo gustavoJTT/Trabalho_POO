@@ -73,5 +73,3 @@ class Produtos:
 
         except FileNotFoundError:
             pass
-    
-
