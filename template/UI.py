@@ -1,7 +1,7 @@
 import streamlit as st
 from view.login_view import ViewLogin
 from view.cliente_view import ClientView
-import json
+from models.carrinho import Carrinhos
 
 class UI:
     @classmethod
@@ -92,17 +92,6 @@ class UI:
 
                 if st.button("Cadastrar"):
                     ViewLogin.register_authentication(username, email, tel, password)
-         
-    @staticmethod
-    def adicionar_ao_carrinho(produto):
-        with open('data/carrinho.json', 'a') as f:
-            json.dump({
-                'id': produto.id,
-                'nome': produto.nome,
-                'descricao': produto.descricao,
-                'preco': produto.preco
-            }, f)
-            f.write('\n')
 
     @staticmethod
     def listar_produtos(prod):
@@ -117,6 +106,12 @@ class UI:
                     st.subheader(produto.nome)
                     st.write(produto.descricao)
                     st.write(f"**Preço**: R${produto.preco}")
+                    
+                    # Adicione um seletor de quantidade
+                    quantidade = st.number_input(f"Quantidade de {produto.nome}", min_value=1, max_value=produto.estoque, value=1, key=f'quantidade-{idx}')
+                    
                     if st.button(f"Adicionar ao Carrinho", key=f'button-{idx}', type="primary"):
+                        cliente_id = st.session_state.user.id  # obtém o id do cliente da sessão
+                        carrinho = Carrinhos()
+                        carrinho.inserir(cliente_id, produto, quantidade) 
                         st.success(f"{produto.nome} adicionado ao carrinho!", icon="✅")
-                        UI.adicionar_ao_carrinho(produto)
