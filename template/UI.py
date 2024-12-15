@@ -63,6 +63,7 @@ class UI:
 
             case "pedidos":
                 st.header("pedidos")
+
         if st.sidebar.button("sair"):
             st.session_state.page = 'login'
             st.rerun()
@@ -107,4 +108,21 @@ class UI:
                     st.write(f"**Preço**: R${produto.preco}")
                     if st.button(f"Adicionar ao Carrinho", key=f'button-{idx}', type="primary"):
                         st.success(f"{produto.nome} adicionado ao carrinho!", icon="✅")
+
+                        
+    def listar_carrinho(prod):
+        for idx, produto in enumerate(prod):
+            with st.container(border=True):
+                col1, col2 = st.columns([1, 3])
+                
+                with col1:
+                    st.image(produto.img, width=100, use_container_width=True)
+
+                with col2:
+                    st.subheader(produto.nome)
+                    st.write(produto.descricao)
+                    st.write(f"**Preço**: R${produto.preco}")
+                    if st.button(f"Adicionar ao Carrinho", key=f'button-{idx}', type="primary"):
+                        st.success(f"{produto.nome} adicionado ao carrinho!", icon="✅")
+
 
