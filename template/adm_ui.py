@@ -57,6 +57,7 @@ class AdmUI:
                             st.rerun()
 
                         cls.atualizar_produto_button(produto,idx)
+
     @staticmethod
     def cadastro_produto_button():
         with st.expander("novo produto"):
@@ -135,10 +136,10 @@ class AdmUI:
                             AdmView.remover_categoria(categoria)
                             st.rerun()
 
-                        cls.atualizar_produto_button(categoria, idx)
+                        cls.atualizar_categoria_button(categoria, idx)
         
     @staticmethod
-    def atualizar_produto_button(cat, key):
+    def atualizar_categoria_button(cat, key):
         with st.expander("atualizar categoria",):
             descricao = st.text_input("Descrição", key=f"descricao_cat{key}", value=cat.descricao)
 
