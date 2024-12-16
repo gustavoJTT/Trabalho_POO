@@ -13,9 +13,15 @@ class AdmUI:
 
             case "categorias":
                 st.header("categorias de produtos")
+                st.write("---")
+                cls.cadastra_categoria()
+                st.write('---')
+                cls.manter_categoria(AdmView.listar_categoria())
+
 
             case "produtos":
                 st.header("Produtos")
+                st.write("---")
                 cls.cadastro_produto_button()
                 st.write("---")
                 cls.manter_produto(AdmView.listar_produtos())
@@ -108,8 +114,47 @@ class AdmUI:
                                 AdmView.alterar_adm(client)
                                 st.rerun()
 
+    @classmethod
+    def manter_categoria(cls, cat):
+        if len(cat) == 0:
+            st.subheader("nenhuma categoria registrada")
+        else:
+            for idx, categoria in enumerate(cat):
+                with st.container(border=True):
+                    col1, col2 = st.columns([3, 1], vertical_alignment="top")
+                    
+                    with col1:
+                        st.subheader(f"ID: {categoria.id}")
+                        with st.container(border=True):
+                            st.write(categoria.descricao)
+                        
+
+                    with col2:
+
+                        if st.button(f"Remover", key=f'button_cat-{idx}', type="primary", use_container_width= True):
+                            AdmView.remover_categoria(categoria)
+                            st.rerun()
+
+                        cls.atualizar_produto_button(categoria, idx)
+        
+    @staticmethod
+    def atualizar_produto_button(cat, key):
+        with st.expander("atualizar categoria",):
+            descricao = st.text_input("Descrição", key=f"descricao_cat{key}", value=cat.descricao)
 
 
+            if st.button("atualizar", key=f"ac{key}"):
+                AdmView.atualizar_categoria(cat.id, descricao)
+                st.rerun()
+    
+    @staticmethod
+    def cadastra_categoria():
+        with st.expander("nova categoria"):
+            d = st.text_input("descriçao")
+            if st.button("cadastra categoria"):
+                AdmView.cadastra_categoria(d)
+                st.rerun()
+        
 
 
 

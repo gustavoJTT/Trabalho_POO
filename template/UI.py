@@ -13,8 +13,9 @@ class UI:
             st.session_state.user = None
 
         st.set_page_config(
-        page_title="APP",  
-        page_icon="🚀",           
+        page_title="Ecomercio",  
+        page_icon="🛒",  
+        layout="wide",        
         initial_sidebar_state="expanded"
         )
 
