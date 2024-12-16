@@ -1,6 +1,7 @@
 import streamlit as st
 from view.login_view import ViewLogin
 from view.cliente_view import ClientView
+from template.adm_ui import AdmUI
 
 class UI:
     @classmethod
@@ -26,7 +27,7 @@ class UI:
                 cls.__login()
 
             case'admin':
-                cls.__admin()
+                AdmUI.admin()
 
     @classmethod
     def __cliente(cls):
@@ -46,27 +47,6 @@ class UI:
             st.session_state.page = 'login'
             st.rerun()
 
-
-    @classmethod
-    def __admin(cls):
-        st.title("Bem-vindo à página de administrador")
-        section = st.sidebar.selectbox("Menu Administrador", ("clientes", "categorias", "produtos", "pedidos"))
-        match section:
-            case "clientes":
-                st.header("Clientes cadastrados")
-
-            case "categorias":
-                st.header("categorias de produtos")
-
-            case "produtos":
-                st.header("Produtos")
-
-            case "pedidos":
-                st.header("pedidos")
-
-        if st.sidebar.button("sair"):
-            st.session_state.page = 'login'
-            st.rerun()
 
     @classmethod
     def __login(cls):
@@ -110,19 +90,3 @@ class UI:
                         st.success(f"{produto.nome} adicionado ao carrinho!", icon="✅")
 
                         
-    def listar_carrinho(prod):
-        for idx, produto in enumerate(prod):
-            with st.container(border=True):
-                col1, col2 = st.columns([1, 3])
-                
-                with col1:
-                    st.image(produto.img, width=100, use_container_width=True)
-
-                with col2:
-                    st.subheader(produto.nome)
-                    st.write(produto.descricao)
-                    st.write(f"**Preço**: R${produto.preco}")
-                    if st.button(f"Adicionar ao Carrinho", key=f'button-{idx}', type="primary"):
-                        st.success(f"{produto.nome} adicionado ao carrinho!", icon="✅")
-
-
