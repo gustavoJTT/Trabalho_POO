@@ -2,6 +2,7 @@ import streamlit as st
 from view.login_view import ViewLogin
 from view.cliente_view import ClientView
 from view.carrinho_view import CarrinhoView
+from template.carrinho_ui import CarrinhoUI
 from template.adm_ui import AdmUI
 
 class UI:
@@ -40,7 +41,8 @@ class UI:
                 cls.listar_produtos(ClientView.listar_produtos())
 
             case "carrinho":
-                st.header("carrinho")
+                carrinho_ui = CarrinhoUI()
+                carrinho_ui.run()
             case "pedidos":
                 st.header("pedidos")
 

@@ -1,5 +1,1 @@
-no view vai pegar apenas o cliente logado e mostrar o carrinho
-
-uma função com botão para remover item do carrinho
-uma função pra finalizar a compra, lá no final do carrinho
-  remove o produto do estoque de acordo com o id do produto
+valor do produto * quantidade, valor total da compra, botão de remover do carrinho
