@@ -1,6 +1,7 @@
 import streamlit as st
 from view.login_view import ViewLogin
 from view.cliente_view import ClientView
+from view.carrinho_view import CarrinhoView
 from template.adm_ui import AdmUI
 
 class UI:
@@ -75,6 +76,7 @@ class UI:
 
     @staticmethod
     def listar_produtos(prod):
+        carrinho_view = CarrinhoView()
         for idx, produto in enumerate(prod):
             with st.container(border=True):
                 col1, col2 = st.columns([1, 3])
@@ -86,7 +88,8 @@ class UI:
                     st.subheader(produto.nome)
                     st.write(produto.descricao)
                     st.write(f"**Preço**: R${produto.preco}")
+                    quantidade = st.number_input("Quantidade", min_value=1, value=1, key=f'quantidade-{idx}')
                     if st.button(f"Adicionar ao Carrinho", key=f'button-{idx}', type="primary"):
+                        cliente_id = st.session_state.user.id
+                        carrinho_view.adicionar_item(cliente_id, produto.id, quantidade)
                         st.success(f"{produto.nome} adicionado ao carrinho!", icon="✅")
-
-                        
