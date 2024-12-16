@@ -1,7 +1,9 @@
 import streamlit as st
 from view.login_view import ViewLogin
 from view.cliente_view import ClientView
-from models.carrinho import Carrinhos
+from view.carrinho_view import CarrinhoView
+from template.carrinho_ui import CarrinhoUI
+from template.adm_ui import AdmUI
 
 class UI:
     @classmethod
@@ -27,7 +29,7 @@ class UI:
                 cls.__login()
 
             case'admin':
-                cls.__admin()
+                AdmUI.admin()
 
     @classmethod
     def __cliente(cls):
@@ -39,7 +41,8 @@ class UI:
                 cls.listar_produtos(ClientView.listar_produtos())
 
             case "carrinho":
-                st.header("carrinho")
+                carrinho_ui = CarrinhoUI()
+                carrinho_ui.run()
             case "pedidos":
                 st.header("pedidos")
 
@@ -47,26 +50,6 @@ class UI:
             st.session_state.page = 'login'
             st.rerun()
 
-
-    @classmethod
-    def __admin(cls):
-        st.title("Bem-vindo à página de administrador")
-        section = st.sidebar.selectbox("Menu Administrador", ("clientes", "categorias", "produtos", "pedidos"))
-        match section:
-            case "clientes":
-                st.header("Clientes cadastrados")
-
-            case "categorias":
-                st.header("categorias de produtos")
-
-            case "produtos":
-                st.header("Produtos")
-
-            case "pedidos":
-                st.header("pedidos")
-        if st.sidebar.button("sair"):
-            st.session_state.page = 'login'
-            st.rerun()
 
     @classmethod
     def __login(cls):
@@ -95,6 +78,7 @@ class UI:
 
     @staticmethod
     def listar_produtos(prod):
+        carrinho_view = CarrinhoView()
         for idx, produto in enumerate(prod):
             with st.container(border=True):
                 col1, col2 = st.columns([1, 3])
@@ -106,12 +90,8 @@ class UI:
                     st.subheader(produto.nome)
                     st.write(produto.descricao)
                     st.write(f"**Preço**: R${produto.preco}")
-                    
-                    # Adicione um seletor de quantidade
-                    quantidade = st.number_input(f"Quantidade de {produto.nome}", min_value=1, max_value=produto.estoque, value=1, key=f'quantidade-{idx}')
-                    
+                    quantidade = st.number_input("Quantidade", min_value=1, value=1, key=f'quantidade-{idx}')
                     if st.button(f"Adicionar ao Carrinho", key=f'button-{idx}', type="primary"):
-                        cliente_id = st.session_state.user.id  # obtém o id do cliente da sessão
-                        carrinho = Carrinhos()
-                        carrinho.inserir(cliente_id, produto, quantidade) 
+                        cliente_id = st.session_state.user.id
+                        carrinho_view.adicionar_item(cliente_id, produto.id, quantidade)
                         st.success(f"{produto.nome} adicionado ao carrinho!", icon="✅")

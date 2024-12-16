@@ -43,7 +43,8 @@ class Produtos:
         if x != None:
             cls.objetos.remove(x)
             cls.objetos.append(obj)
-            cls.salvar()        
+            cls.salvar()      
+              
     @classmethod
     def excluir(cls, obj):
         x = cls.listar_id(obj.id)
