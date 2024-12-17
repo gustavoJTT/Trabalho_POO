@@ -1,18 +1,28 @@
 from models.produto import Produto, Produtos
+from models.cliente import Clientes
+from models.categoria import Categoria, Categorias
+import streamlit as st
 
 class AdmView:
     @staticmethod
     def cadastra_produto(nome, descricao, preco, img, estoque, id_categoria):
-        p = Produto(
-            id = 0,
-            nome = nome,
-            descricao = descricao,
-            preco = preco,
-            img = img,
-            estoque = estoque,
-            id_categoria = id_categoria
-        )
-        Produtos.inserir(p)
+        liberado = True
+        for p in Produtos.listar():
+            if nome == p.nome:
+                liberado = False
+        if liberado:
+            p = Produto(
+                id = 0,
+                nome = nome,
+                descricao = descricao,
+                preco = preco,
+                img = img,
+                estoque = estoque,
+                id_categoria = id_categoria
+            )
+            Produtos.inserir(p)
+        else:
+            st.error("ja existe um produto com esse nome")
 
     @staticmethod   
     def listar_produtos():
@@ -34,4 +44,35 @@ class AdmView:
             id_categoria = id_categoria
         )
         Produtos.atualizar(p)
-        
+
+    @staticmethod
+    def listar_clientes():
+        return Clientes.listar()
+    
+    @staticmethod
+    def remover_cliente(client):
+        Clientes.excluir(client)
+
+    @staticmethod
+    def alterar_adm(client):
+        client.adm = not(client.adm)
+        Clientes.salvar()
+
+    @staticmethod
+    def listar_categoria():
+        return Categorias.listar()
+    
+    @staticmethod
+    def remover_categoria(categoria):
+        Categorias.excluir(categoria)
+
+    @staticmethod
+    def atualizar_categoria(id, descri):
+        c = Categoria(id, descri)
+        Categorias.atualizar(c)
+    
+    @staticmethod
+    def cadastra_categoria(descriçao):
+        c = Categoria(0, descriçao)
+        Categorias.inserir(c)
+
