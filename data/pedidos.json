@@ -1,1 +1,1 @@
-[]
+[{"cliente_id": 2, "produtos": [{"produto_id": 1, "quantidade": 1}, {"produto_id": 2, "quantidade": 11}], "valor_final": 2422.5, "data_compra": "2024-12-17 16:28:02"}, {"cliente_id": 2, "produtos": [{"produto_id": 1, "quantidade": 1}, {"produto_id": 2, "quantidade": 1111}], "valor_final": 4622.5, "data_compra": "2024-12-17 17:57:54"}]

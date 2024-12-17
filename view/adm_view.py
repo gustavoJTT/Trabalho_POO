@@ -55,7 +55,7 @@ class AdmView:
 
     @staticmethod
     def alterar_adm(client):
-        client.adm = not(client.adm)
+        client.set_adm(not(client.adm))
         Clientes.salvar()
 
     @staticmethod
@@ -75,4 +75,3 @@ class AdmView:
     def cadastra_categoria(descriçao):
         c = Categoria(0, descriçao)
         Categorias.inserir(c)
-
