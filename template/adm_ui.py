@@ -24,7 +24,7 @@ class AdmUI:
                 st.write("---")
                 cls.cadastro_produto_button()
                 st.write("---")
-                cls.manter_produto(AdmView.listar_produtos())
+                cls.manter_produto(AdmView.listar_pedidos())
 
             case "pedidos":
                 st.header("pedidos")

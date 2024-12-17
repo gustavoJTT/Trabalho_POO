@@ -43,9 +43,17 @@ class CarrinhoView:
   
   def salvar_limpar(self, cliente_id):
     produtos = [item for item in self.carrinho.objetos if item["cliente_id"] == cliente_id]
-    produtos_info = [{"produto_id": p["produto_id"], "quantidade": p["quantidade"]} for p in produtos]
+    produtos_info = []
     valor_final = self.calcular_subtotal(produtos)
     data_compra = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    with open("data/produtos.json", "r") as file:
+      produtos_data = json.load(file)
+
+    for p in produtos:
+      produto = next((produto for produto in produtos_data if produto["id"] == p["produto_id"]), None)
+      if produto:
+        produtos_info.append({"nome": produto["nome"], "quantidade": p["quantidade"]})
 
     with open("data/pedidos.json", "r+") as f:
       pedidos = json.load(f)

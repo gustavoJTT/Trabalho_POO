@@ -1,6 +1,7 @@
 from models.produto import Produto, Produtos
 from models.cliente import Clientes
 from models.categoria import Categoria, Categorias
+from models.pedidos import Pedidos
 import streamlit as st
 
 class AdmView:
@@ -75,3 +76,7 @@ class AdmView:
     def cadastra_categoria(descriçao):
         c = Categoria(0, descriçao)
         Categorias.inserir(c)
+
+    @staticmethod
+    def listar_pedidos():
+        return Pedidos.listar()

@@ -8,3 +8,8 @@ class Pedidos:
     with open("data/pedidos.json", "r") as f:
       return json.load(f)
     
+  @classmethod
+  def listar_pedidos(cls, cliente_id):
+    with open("data/pedidos.json", "r") as f:
+      pedidos = json.load(f)
+      return [pedido for pedido in pedidos if pedido["cliente_id"] == cliente_id]

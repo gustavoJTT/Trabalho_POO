@@ -45,6 +45,7 @@ class UI:
             case "carrinho":
                 carrinho_ui = CarrinhoUI()
                 carrinho_ui.run()
+                
             case "pedidos":
                 Pedidos_ui = PedidosUI()
                 Pedidos_ui.run()
