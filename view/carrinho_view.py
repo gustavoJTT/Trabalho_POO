@@ -48,11 +48,11 @@ class CarrinhoView:
     data_compra = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     with open("data/pedidos.json", "r+") as f:
-        pedidos = json.load(f)
-        pedidos.append({"cliente_id": cliente_id, "produtos": produtos_info, "valor_final": valor_final, "data_compra": data_compra})
-        f.seek(0)
-        json.dump(pedidos, f)
-        f.truncate()
+      pedidos = json.load(f)
+      pedidos.append({"cliente_id": cliente_id, "produtos": produtos_info, "valor_final": valor_final, "data_compra": data_compra})
+      f.seek(0)
+      json.dump(pedidos, f)
+      f.truncate()
 
     self.carrinho.objetos = [item for item in self.carrinho.objetos if item["cliente_id"] != cliente_id]
     self.carrinho.salvar()
