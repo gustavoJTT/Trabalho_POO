@@ -79,4 +79,5 @@ class AdmView:
 
     @staticmethod
     def listar_pedidos():
-        return Pedidos.listar()
+        pedidos = Pedidos.carregar_pedidos()
+        return pedidos

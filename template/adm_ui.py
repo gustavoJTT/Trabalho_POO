@@ -18,16 +18,22 @@ class AdmUI:
                 st.write('---')
                 cls.manter_categoria(AdmView.listar_categoria())
 
-
             case "produtos":
                 st.header("Produtos")
                 st.write("---")
                 cls.cadastro_produto_button()
                 st.write("---")
-                cls.manter_produto(AdmView.listar_pedidos())
+                cls.manter_produto(AdmView.listar_produtos())
 
             case "pedidos":
-                st.header("pedidos")
+                st.header("Pedidos")
+                st.write("---")
+                pedidos = AdmView.listar_pedidos()
+                if pedidos:
+                    for pedido in pedidos:
+                        st.write(f"Pedido {pedido['id']}: {pedido['cliente_id']} - {pedido['data_compra']}")
+                else:
+                    st.subheader("Nenhum pedido encontrado")
 
         if st.sidebar.button("sair"):
             st.session_state.page = 'login'
@@ -155,7 +161,3 @@ class AdmUI:
             if st.button("cadastra categoria"):
                 AdmView.cadastra_categoria(d)
                 st.rerun()
-        
-
-
-
