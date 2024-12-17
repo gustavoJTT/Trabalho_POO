@@ -1,1 +1,3 @@
-valor do produto * quantidade, valor total da compra, botão de remover do carrinho
+O erro continua ocorrendo porque o produto_id não é único para cada botão. Isso pode acontecer se você tiver múltiplos produtos com o mesmo produto_id no seu carrinho.
+
+Para resolver isso, você pode usar um key que seja único para cada botão, independentemente do produto_id. Uma opção é usar um contador para gerar um key único para cada botão.

@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[{"id": 1, "nome": "flavio matias", "email": "flavio.matias@gmail.com", "fone": "+55 (84) 99182-8152", "senha": "flavio123", "adm": true}, {"id": 2, "nome": "cliente", "email": "cliente@gmail.com", "fone": "+55 (84) 4002-8922", "senha": "cliente123", "adm": false}, {"id": 3, "nome": "gustavo", "email": "gustavo", "fone": "gustavo", "senha": "gustavo", "adm": false}]
-=======
 [{"id": 1, "nome": "flavio matias", "email": "flavio.matias@gmail.com", "fone": "+55 (84) 99182-8152", "senha": "flavio123", "adm": true}, {"id": 2, "nome": "cliente", "email": "cliente@gmail.com", "fone": "+55 (84) 4002-8922", "senha": "cliente123", "adm": false}, {"id": 3, "nome": "victor", "email": "victor@gmail.com", "fone": "3", "senha": "victor123", "adm": true}]
->>>>>>> origin/mesclagem
