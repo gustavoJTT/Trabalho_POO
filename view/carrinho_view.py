@@ -1,4 +1,5 @@
 import json
+import datetime
 from models.carrinho import Carrinho
 
 class CarrinhoView:
@@ -39,3 +40,19 @@ class CarrinhoView:
   def get_produtos_no_carrinho(self, cliente_id):
     carrinho_data = self.carrinho.carregar_carrinho()
     return [item for item in carrinho_data if item["cliente_id"] == cliente_id]
+  
+  def salvar_limpar(self, cliente_id):
+    produtos = [item for item in self.carrinho.objetos if item["cliente_id"] == cliente_id]
+    produtos_info = [{"produto_id": p["produto_id"], "quantidade": p["quantidade"]} for p in produtos]
+    valor_final = self.calcular_subtotal(produtos)
+    data_compra = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    with open("data/pedidos.json", "r+") as f:
+        pedidos = json.load(f)
+        pedidos.append({"cliente_id": cliente_id, "produtos": produtos_info, "valor_final": valor_final, "data_compra": data_compra})
+        f.seek(0)
+        json.dump(pedidos, f)
+        f.truncate()
+
+    self.carrinho.objetos = [item for item in self.carrinho.objetos if item["cliente_id"] != cliente_id]
+    self.carrinho.salvar()

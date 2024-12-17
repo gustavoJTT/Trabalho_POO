@@ -49,5 +49,6 @@ class CarrinhoUI:
       st.subheader(f"Subtotal: R${subtotal:.2f}")
     with col2:
       if st.button("Confirmar compra", type="primary"):
-        # confirmar compra
+        cliente_id = st.session_state.user.id
+        self.carrinho_service.salvar_limpar(cliente_id)
         st.success("Compra confirmada!")
