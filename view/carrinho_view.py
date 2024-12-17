@@ -46,11 +46,15 @@ class CarrinhoView:
     
     # Itera sobre cada produto na lista de produtos
     for produto in produtos:
-        produto_quant = next((p for p in self.listar_produtos() if p["id"] == produto["produto_id"])) #gpt
-        
-        if produto_quant:
-            valor_total = float(produto_quant['preco']) * float(produto['quantidade'])
-            subtotal += valor_total
+      produto_quant = next((p for p in self.listar_produtos() if p["id"] == produto["produto_id"])) #gpt
+      
+      if produto_quant:
+        valor_total = float(produto_quant['preco']) * float(produto['quantidade'])
+        subtotal += valor_total
     
     # Retorna o subtotal calculado
     return subtotal
+  
+  def get_produtos_no_carrinho(self, cliente_id):
+    carrinho_data = self.carrinho.listar()
+    return [item for item in carrinho_data if item["cliente_id"] == cliente_id]

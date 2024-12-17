@@ -11,20 +11,6 @@ class Carrinho:
   def remover_item(self, produto_id):
     self.carrinho.remover_item(produto_id)
 
-  def calcular_subtotal(self, produtos):
-    subtotal = 0
-    
-    # Itera sobre cada produto na lista de produtos
-    for produto in produtos:
-      produto_quant = next((p for p in self.listar_produtos() if p["id"] == produto["produto_id"])) #gpt
-      
-      if produto_quant:
-        valor_total = float(produto_quant['preco']) * float(produto['quantidade'])
-        subtotal += valor_total
-    
-    # Retorna o subtotal calculado
-    return subtotal
-
   def get_produtos_no_carrinho(self, cliente_id):
     carrinho_data = self.carrinho.listar()
     return [item for item in carrinho_data if item["cliente_id"] == cliente_id]
@@ -70,7 +56,7 @@ class CarrinhoUI:
               st.success("Item removido com sucesso!")
 
   def exibir_subtotal(self, produtos_no_carrinho):
-    subtotal = self.carrinho_service.calcular_subtotal(produtos_no_carrinho)
+    subtotal = self.carrinho_service.carrinho.calcular_subtotal(produtos_no_carrinho)
     st.markdown("---")
     col1, col2 = st.columns([4, 2])
     with col1:
