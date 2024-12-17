@@ -1,23 +1,9 @@
 import streamlit as st
 from view.carrinho_view import CarrinhoView
 
-class Carrinho:
-  def __init__(self):
-    self.carrinho = CarrinhoView()
-
-  def listar_produtos(self):
-    return self.carrinho.listar_produtos()
-
-  def remover_item(self, produto_id):
-    self.carrinho.remover_item(produto_id)
-
-  def get_produtos_no_carrinho(self, cliente_id):
-    carrinho_data = self.carrinho.listar()
-    return [item for item in carrinho_data if item["cliente_id"] == cliente_id]
-
 class CarrinhoUI:
   def __init__(self):
-    self.carrinho_service = Carrinho()
+    self.carrinho_service = CarrinhoView()
 
   def run(self):
     st.header("Carrinho")
@@ -56,12 +42,12 @@ class CarrinhoUI:
               st.success("Item removido com sucesso!")
 
   def exibir_subtotal(self, produtos_no_carrinho):
-    subtotal = self.carrinho_service.carrinho.calcular_subtotal(produtos_no_carrinho)
+    subtotal = self.carrinho_service.calcular_subtotal(produtos_no_carrinho)
     st.markdown("---")
     col1, col2 = st.columns([4, 2])
     with col1:
       st.subheader(f"Subtotal: R${subtotal:.2f}")
     with col2:
       if st.button("Confirmar compra", type="primary"):
-        # Aqui você pode adicionar a lógica para confirmar a compra
+        # confirmar compra
         st.success("Compra confirmada!")
