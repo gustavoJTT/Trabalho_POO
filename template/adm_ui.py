@@ -37,9 +37,9 @@ class AdmUI:
                         with st.container(border=True):
 
                             if not pedidos_cliente:
-                                st.markdown(f"<center><b>Cliente {cliente_id} - {cliente.nome} ainda não fez pedidos<b></center>", unsafe_allow_html=True)
+                                st.markdown(f"<center><b>ID: {cliente_id} - {cliente.nome} ainda não fez pedidos<b></center>", unsafe_allow_html=True)
                             else:
-                                st.header(f"Cliente {cliente_id} - {cliente.nome}")
+                                st.header(f"ID {cliente_id} - {cliente.nome}")
                                 st.write("")
                                 for i, pedido in enumerate(pedidos_cliente):
                                     st.markdown(f"Pedido do dia {pedido['data_compra']}")

@@ -10,6 +10,9 @@ class Produto:
         self.id_categoria = id_categoria
     def __str__(self):
         return f"{self.id} - {self.descricao} - {self.estoque} - R${self.preco:.2f}"
+    
+    def descontar_estoque(self, quantidade):
+        self.estoque = int(self.estoque) - int(quantidade)
 
 class Produtos:
     objetos = [] 
@@ -75,6 +78,3 @@ class Produtos:
         except FileNotFoundError:
             pass
 
-    def descontar_estoque(self, quantidade):
-        self.estoque = int(self.estoque) - int(quantidade)
-        self.estoque = str(self.estoque)

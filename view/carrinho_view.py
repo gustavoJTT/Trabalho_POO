@@ -45,6 +45,7 @@ class CarrinhoView:
     produto = Produtos.listar_id(produto_id)
     if produto:
       produto.descontar_estoque(quantidade)
+      Produtos.salvar()
       
   def salvar_limpar(self, cliente_id):
     produtos = [item for item in self.carrinho.objetos if item["cliente_id"] == cliente_id]
