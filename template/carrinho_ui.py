@@ -55,3 +55,4 @@ class CarrinhoUI:
           self.carrinho_service.atualizar_estoque(produto["produto_id"], produto['quantidade'])
         self.carrinho_service.salvar_limpar(cliente_id)
         st.success("Compra confirmada!")
+        st.rerun()
