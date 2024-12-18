@@ -20,9 +20,11 @@ class Carrinho:
     with open("data/carrinho.json", "w") as arquivo:
       json.dump(self.objetos, arquivo)
 
-  def remover_item(self, produto_id):
-    self.objetos = [item for item in self.objetos if item["produto_id"] != produto_id] # passa pela lista e remove o item que tem o produto_id igual ao contador
-    self.salvar()
+  def remover_item(self, item_id):
+    x = next((item for item in self.objetos if item["id_sequencia"] == item_id), None)
+    if x != None:
+      self.objetos.remove(x)
+      self.salvar()
 
   def limpar(self):
     self.objetos = []

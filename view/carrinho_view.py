@@ -18,8 +18,7 @@ class CarrinhoView:
     self.carrinho.inserir(cliente_id, produto_id, quantidade)
 
   def remover_item(self, item_id):
-    self.carrinho.objetos = [item for item in self.carrinho.objetos if item["produto_id"] != item_id]
-    self.carrinho.salvar()
+    self.carrinho.remover_item(item_id)
 
   def filtro_id(self, id):
     return self.carrinho.listar_id(id)

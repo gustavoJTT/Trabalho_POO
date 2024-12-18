@@ -38,7 +38,7 @@ class CarrinhoUI:
 
           with col3:
             if st.button("Remover do carrinho", key=f"remover_botao_{i}", type="secondary"):
-              self.carrinho_service.remover_item(produto["produto_id"])
+              self.carrinho_service.remover_item(produto["id_sequencia"])
               st.success("Item removido com sucesso!")
 
   def exibir_subtotal(self, produtos_no_carrinho):
