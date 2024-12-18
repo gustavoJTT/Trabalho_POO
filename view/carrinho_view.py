@@ -45,7 +45,7 @@ class CarrinhoView:
     produtos = [item for item in self.carrinho.objetos if item["cliente_id"] == cliente_id]
     produtos_info = []
     valor_final = self.calcular_subtotal(produtos)
-    data_compra = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    data_compra = datetime.datetime.now().strftime("%d-%m-%y")
 
     with open("data/produtos.json", "r") as file:
       produtos_data = json.load(file)
