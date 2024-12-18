@@ -1,1 +1,1 @@
-[{"cliente_id": 2, "produtos": [{"nome": "smartfone sansung", "quantidade": 1}, {"nome": "video game", "quantidade": 11}], "valor_final": 2422.5, "data_compra": "2024-12-17 20:13:53"}]
+[{"cliente_id": 2, "produtos": [{"nome": "smartfone sansung", "quantidade": 1}, {"nome": "video game", "quantidade": 11}], "valor_final": 2422.5, "data_compra": "2024-12-17 20:13:53"}, {"cliente_id": 4, "produtos": [{"nome": "smartfone sansung", "quantidade": 1}, {"nome": "video game", "quantidade": 1}], "valor_final": 2402.5, "data_compra": "2024-12-17 21:10:03"}]
