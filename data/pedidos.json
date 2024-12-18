@@ -1,1 +1,1 @@
-[]
+[{"cliente_id": 2, "produtos": [{"nome": "smartfone sansung", "quantidade": 1}], "valor_final": 2400.5, "data_compra": "17-12-24"}, {"cliente_id": 2, "produtos": [{"nome": "video game", "quantidade": 1}], "valor_final": 2.0, "data_compra": "17-12-24"}, {"cliente_id": 2, "produtos": [{"nome": "smartfone sansung", "quantidade": 1}], "valor_final": 2400.5, "data_compra": "17-12-24"}]

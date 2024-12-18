@@ -50,5 +50,6 @@ class CarrinhoUI:
     with col2:
       if st.button("Confirmar compra", type="primary"):
         cliente_id = st.session_state.user.id
+        self.atualizar_estoque(produtos_no_carrinho)
         self.carrinho_service.salvar_limpar(cliente_id)
         st.success("Compra confirmada!")

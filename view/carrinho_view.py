@@ -1,6 +1,7 @@
 import json
 import datetime
 from models.carrinho import Carrinho
+from models.produto import Produtos
 
 class CarrinhoView:
   def __init__(self):
@@ -40,6 +41,11 @@ class CarrinhoView:
     carrinho_data = self.carrinho.carregar_carrinho()
     return [item for item in carrinho_data if item["cliente_id"] == cliente_id]
   
+  def atualizar_estoque(self, produto_id, quantidade):
+    produto = Produtos.listar_id(produto_id)
+    if produto:
+      produto.descontar_estoque(quantidade)
+      
   def salvar_limpar(self, cliente_id):
     produtos = [item for item in self.carrinho.objetos if item["cliente_id"] == cliente_id]
     produtos_info = []

@@ -74,3 +74,7 @@ class Produtos:
 
         except FileNotFoundError:
             pass
+
+    def descontar_estoque(self, quantidade):
+        self.estoque = int(self.estoque) - int(quantidade)
+        self.estoque = str(self.estoque)
