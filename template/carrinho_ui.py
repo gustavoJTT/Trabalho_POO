@@ -38,7 +38,7 @@ class CarrinhoUI:
 
           with col3:
             if st.button("Remover do carrinho", key=f"remover_botao_{i}", type="secondary"):
-              self.carrinho_service.remover_item(produto["produto_id"])
+              self.carrinho_service.remover_item(produto["id_sequencia"])
               st.success("Item removido com sucesso!")
 
   def exibir_subtotal(self, produtos_no_carrinho):
@@ -50,5 +50,6 @@ class CarrinhoUI:
     with col2:
       if st.button("Confirmar compra", type="primary"):
         cliente_id = st.session_state.user.id
+        self.atualizar_estoque(produtos_no_carrinho)
         self.carrinho_service.salvar_limpar(cliente_id)
         st.success("Compra confirmada!")

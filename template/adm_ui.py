@@ -18,7 +18,6 @@ class AdmUI:
                 st.write('---')
                 cls.manter_categoria(AdmView.listar_categoria())
 
-
             case "produtos":
                 st.header("Produtos")
                 st.write("---")
@@ -27,7 +26,30 @@ class AdmUI:
                 cls.manter_produto(AdmView.listar_produtos())
 
             case "pedidos":
-                st.header("pedidos")
+                st.header("Pedidos")
+                st.write("---")
+                pedidos_por_cliente = AdmView.listar_pedidos_por_cliente()
+                if not pedidos_por_cliente:
+                    st.markdown("<center><b>Ainda não há pedidos<b></center>", unsafe_allow_html=True)
+                else:
+                    for cliente_id, pedidos_cliente in pedidos_por_cliente.items():
+                        cliente = AdmView.buscar_cliente_por_id(cliente_id)
+                        with st.container(border=True):
+
+                            if not pedidos_cliente:
+                                st.markdown(f"<center><b>Cliente {cliente_id} - {cliente.nome} ainda não fez pedidos<b></center>", unsafe_allow_html=True)
+                            else:
+                                st.header(f"Cliente {cliente_id} - {cliente.nome}")
+                                st.write("")
+                                for i, pedido in enumerate(pedidos_cliente):
+                                    st.markdown(f"Pedido do dia {pedido['data_compra']}")
+                                    st.write(f"Valor total da compra: R${pedido['valor_final']:.2f}")
+                                    st.write("---")
+                                    st.write(f"Produtos;")
+
+                                    for produto in pedido["produtos"]:
+                                        produto_dict = {'nome': produto.get('nome'), 'quantidade': produto.get('quantidade')}
+                                        st.write(f"- {produto_dict['nome']}  ->  x{produto_dict['quantidade']}")
 
         if st.sidebar.button("sair"):
             st.session_state.page = 'login'
@@ -155,7 +177,3 @@ class AdmUI:
             if st.button("cadastra categoria"):
                 AdmView.cadastra_categoria(d)
                 st.rerun()
-        
-
-
-

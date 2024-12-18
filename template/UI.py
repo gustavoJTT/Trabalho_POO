@@ -3,6 +3,7 @@ from view.login_view import ViewLogin
 from view.cliente_view import ClientView
 from view.carrinho_view import CarrinhoView
 from template.carrinho_ui import CarrinhoUI
+from template.pedidos_ui import PedidosUI
 from template.adm_ui import AdmUI
 
 class UI:
@@ -44,8 +45,10 @@ class UI:
             case "carrinho":
                 carrinho_ui = CarrinhoUI()
                 carrinho_ui.run()
+                
             case "pedidos":
-                st.header("pedidos")
+                Pedidos_ui = PedidosUI()
+                Pedidos_ui.run()
 
         if st.sidebar.button("sair"):
             st.session_state.page = 'login'

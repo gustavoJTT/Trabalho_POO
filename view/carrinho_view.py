@@ -1,6 +1,7 @@
 import json
 import datetime
 from models.carrinho import Carrinho
+from models.produto import Produtos
 
 class CarrinhoView:
   def __init__(self):
@@ -18,8 +19,7 @@ class CarrinhoView:
     self.carrinho.inserir(cliente_id, produto_id, quantidade)
 
   def remover_item(self, item_id):
-    self.carrinho.objetos = [item for item in self.carrinho.objetos if item["produto_id"] != item_id]
-    self.carrinho.salvar()
+    self.carrinho.remover_item(item_id)
 
   def filtro_id(self, id):
     return self.carrinho.listar_id(id)
@@ -41,11 +41,24 @@ class CarrinhoView:
     carrinho_data = self.carrinho.carregar_carrinho()
     return [item for item in carrinho_data if item["cliente_id"] == cliente_id]
   
+  def atualizar_estoque(self, produto_id, quantidade):
+    produto = Produtos.listar_id(produto_id)
+    if produto:
+      produto.descontar_estoque(quantidade)
+      
   def salvar_limpar(self, cliente_id):
     produtos = [item for item in self.carrinho.objetos if item["cliente_id"] == cliente_id]
-    produtos_info = [{"produto_id": p["produto_id"], "quantidade": p["quantidade"]} for p in produtos]
+    produtos_info = []
     valor_final = self.calcular_subtotal(produtos)
-    data_compra = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    data_compra = datetime.datetime.now().strftime("%d-%m-%y")
+
+    with open("data/produtos.json", "r") as file:
+      produtos_data = json.load(file)
+
+    for p in produtos:
+      produto = next((produto for produto in produtos_data if produto["id"] == p["produto_id"]), None)
+      if produto:
+        produtos_info.append({"nome": produto["nome"], "quantidade": p["quantidade"]})
 
     with open("data/pedidos.json", "r+") as f:
       pedidos = json.load(f)

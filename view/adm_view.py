@@ -1,6 +1,7 @@
 from models.produto import Produto, Produtos
 from models.cliente import Clientes
 from models.categoria import Categoria, Categorias
+from models.pedidos import Pedidos
 import streamlit as st
 
 class AdmView:
@@ -75,3 +76,27 @@ class AdmView:
     def cadastra_categoria(descriçao):
         c = Categoria(0, descriçao)
         Categorias.inserir(c)
+
+    @staticmethod
+    def listar_pedidos():
+        pedidos = Pedidos.carregar_pedidos()
+        return pedidos
+    
+    @staticmethod
+    def listar_pedidos_por_cliente():
+        pedidos = AdmView.listar_pedidos()
+        pedidos_por_cliente = {}
+        for pedido in pedidos:
+            if pedido["cliente_id"] not in pedidos_por_cliente:
+                pedidos_por_cliente[pedido["cliente_id"]] = []
+            pedidos_por_cliente[pedido["cliente_id"]].append(pedido)
+
+        return pedidos_por_cliente
+    
+    @staticmethod
+    def buscar_cliente_por_id(cliente_id):
+        clientes = Clientes.listar()
+        for cliente in clientes:
+            if cliente.id == cliente_id:
+                return cliente
+        return None
